@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "842180427165",
+    "firebase_url": "https://smart-chat-cc69a.firebaseio.com",
+    "project_id": "smart-chat-cc69a",
+    "storage_bucket": "smart-chat-cc69a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842180427165:android:4983656a20cf2596dd0374",
+        "android_client_info": {
+          "package_name": "com.example.smartchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842180427165-uukflvkbu1bm41c4pa4u544tmv8uspoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6KvbzR7V-nEeq2j_TSSYC7Ft-VH4B8lo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842180427165-uukflvkbu1bm41c4pa4u544tmv8uspoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
