@@ -18,6 +18,7 @@ import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -88,11 +89,17 @@ public class MainActivity extends AppCompatActivity {
                 3000
         );
 
-        mySearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+        int searchCloseButtonId = mySearchView.getContext().getResources().getIdentifier("android:id/search_close_btn", null, null);
+        ImageView closeButton = (ImageView) mySearchView.findViewById(searchCloseButtonId);
+        closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onClose() {
-                recreate();
-                return false;
+            public void onClick(View v) {
+                if(mySearchView.getQuery().toString().equals("")) {
+                    mySearchView.onActionViewCollapsed();
+                } else {
+                    mySearchView.setQuery("", false);
+                    recreate();
+                }
             }
         });
 
