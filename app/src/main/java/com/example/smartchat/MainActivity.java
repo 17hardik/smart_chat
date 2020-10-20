@@ -1,45 +1,32 @@
 package com.example.smartchat;
 
-import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     TextView Title;
     String S, phone, u_name;
     int i, x, count = 0;
@@ -50,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     UserAdapter userAdapter;
     ProgressDialog pd;
     int size;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -59,13 +47,15 @@ public class MainActivity extends AppCompatActivity {
         phone = preferences.getString("Phone", "");
         setContentView(R.layout.activity_main);
         users = findViewById(R.id.users);
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.chat_action_bar);
-        View view =getSupportActionBar().getCustomView();
+        View view = getSupportActionBar().getCustomView();
         Title = view.findViewById(R.id.users);
         users.setLayoutManager(new LinearLayoutManager(this));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         details = new ArrayList<>();
+        swipeRefreshLayout = findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         final SearchView mySearchView = view.findViewById(R.id.mySearchView);
         new java.util.Timer().schedule(
@@ -204,4 +194,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    @Override
+    public void onRefresh() {
+        recreate();
+    }
 }
