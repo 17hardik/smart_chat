@@ -23,7 +23,8 @@
             tools:ignore="Instantiatable" />
         <activity android:name=".ChangePassword" />
         <activity android:name=".Profile" />
-        <activity android:name=".Chat" />
+        <activity android:name=".Chat"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".PhoneVerification" />
         <activity android:name=".Register" />

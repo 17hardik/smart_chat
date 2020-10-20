@@ -2,6 +2,8 @@ package com.example.smartchat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -48,6 +50,8 @@ public class Chat extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(S,i);
         phone = preferences.getString("Phone","");
         setContentView(R.layout.activity_chat);
+        getSupportActionBar().setDisplayShowCustomEnabled(false);
+        getSupportActionBar().setCustomView(R.layout.chat_action_bar);
         intent = getIntent();
         chatwith = intent.getStringExtra("Phone");
         username = intent.getStringExtra("Username");
