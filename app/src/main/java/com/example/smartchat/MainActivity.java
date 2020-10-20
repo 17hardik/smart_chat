@@ -1,15 +1,24 @@
 package com.example.smartchat;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +36,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     TextView Title;
@@ -51,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.chat_action_bar);
         View view =getSupportActionBar().getCustomView();
         Title = view.findViewById(R.id.users);
-
         users.setLayoutManager(new LinearLayoutManager(this));
         details = new ArrayList<>();
 
@@ -70,11 +81,20 @@ public class MainActivity extends AppCompatActivity {
                                 userAdapter.getFilter().filter(newText);
                                 return false;
                             }
+
                         });
                     }
                 },
                 3000
         );
+
+        mySearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                recreate();
+                return false;
+            }
+        });
 
         reff = FirebaseDatabase.getInstance().getReference().child("Users");
         pd = new ProgressDialog(MainActivity.this);
@@ -115,14 +135,17 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(MainActivity.this, "Please check your Internet Connection", Toast.LENGTH_SHORT).show();
             }
-
         });
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                pd.dismiss();
+                try {
+                    pd.dismiss();
+                } catch (Exception e) {
+
+                }
             }
         }, 3000);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -165,13 +188,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.contact_us:
-                Intent contactIntent = new Intent(MainActivity.this, ContactUs.class);
-                startActivity(contactIntent);
+                Intent intent = new Intent(MainActivity.this, ContactUs.class);
+                startActivity(intent);
                 break;
-
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
         return true;
     }
+
 }

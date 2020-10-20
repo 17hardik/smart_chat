@@ -1,11 +1,21 @@
 package com.example.smartchat;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Handler;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +23,12 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,13 +41,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     Context context;
     ArrayList<UserCardView> details;
     ArrayList<UserCardView> fullDetails;
-    String check;
+    boolean isPresent;
+    MainActivity mainActivity;
 
 
     public UserAdapter(ArrayList<UserCardView> d, Context c) {
         context = c;
         details = d;
         fullDetails = new ArrayList<>(d);
+        mainActivity = new MainActivity();
     }
 
     @NonNull
@@ -43,46 +60,49 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        if (requestContactPermission(details.get(position).getPhone())) {
+            try {
+                holder.Username.setText(details.get(position).getUsername());
+                holder.Name.setText(details.get(position).getName());
+                holder.Number.setText(details.get(position).getPhone());
+                if(requestContactPermission(holder.Number.getText().toString())){
+                    holder.cardView.setVisibility(View.VISIBLE);
+                }
+                Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    getImage(details.get(position).getPhone(), holder);
+                                } catch (Exception e) {
 
-        try {
-            holder.Username.setText(details.get(position).getUsername());
-            holder.Name.setText(details.get(position).getName());
-            holder.Number.setText(details.get(position).getPhone());
-            Thread thread = new Thread() {
-                @Override
-                public void run() {
-                    ((Activity) context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                getImage(details.get(position).getPhone(), holder);
-                            } catch(Exception e){
+                                }
 
                             }
-
-                        }
-                    });
-                }
-            };
-            thread.start();
+                        });
+                    }
+                };
+                thread.start();
 
 //            Picasso.get().load(details.get(position).getCompany_logo()).into(holder.company_logo);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
 
-                    Intent intent = new Intent(context, Chat.class);
-                    String phone = details.get(position).getPhone();
-                    String username = details.get(position).getUsername();
-                    intent.putExtra("Phone", phone);
-                    intent.putExtra("Username", username);
-                    view.getContext().startActivity(intent);
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
+                        Intent intent = new Intent(context, Chat.class);
+                        String phone = details.get(position).getPhone();
+                        String username = details.get(position).getUsername();
+                        intent.putExtra("Phone", phone);
+                        intent.putExtra("Username", username);
+                        view.getContext().startActivity(intent);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     @Override
@@ -94,9 +114,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
         TextView Username, Name, Number;
         ImageView Profile_Picture;
-        String M, J;
-        int j;
-        SharedPreferences preferences = context.getSharedPreferences(M,j);
+        CardView cardView;
 
         public MyViewHolder(@NonNull View itemView) {
 
@@ -105,7 +123,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             Name = itemView.findViewById(R.id.person_name);
             Number = itemView.findViewById(R.id.number);
             Profile_Picture = itemView.findViewById(R.id.profile_picture);
-            check = preferences.getString("Lang","Eng");
+            cardView = itemView.findViewById(R.id.gov_card);
         }
     }
 
@@ -178,4 +196,60 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         });
     }
 
+    public boolean requestContactPermission(String number) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,
+                        android.Manifest.permission.READ_CONTACTS)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder((Activity) context);
+                    builder.setTitle("Read Contacts permission");
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setMessage("Please enable access to contacts.");
+                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @TargetApi(Build.VERSION_CODES.M)
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            ActivityCompat.requestPermissions((Activity) context,
+                                    new String[]{android.Manifest.permission.READ_CONTACTS},
+                                    1);
+                        }
+                    });
+                    builder.show();
+                } else {
+                    ActivityCompat.requestPermissions((Activity) context,
+                            new String[]{android.Manifest.permission.READ_CONTACTS},
+                            1);
+                    new Handler().postDelayed((new Runnable() {
+                        @Override
+                        public void run() {
+                            ((Activity)context).recreate();
+                        }
+                    }), 3000);
+                }
+            } else {
+                isPresent = contactExists((Activity) context, number);
+            }
+        } else {
+            isPresent = contactExists((Activity) context, number);
+        }
+        return isPresent;
+    }
+    public boolean contactExists(Context context, String number) {
+        /// number is the phone number
+        Uri lookupUri = Uri.withAppendedPath(
+                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(number));
+        String[] mPhoneNumberProjection = { ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
+        Cursor cur = context.getContentResolver().query(lookupUri,mPhoneNumberProjection, null, null, null);
+        try {
+            if (cur.moveToFirst()) {
+                cur.close();
+                return true;
+            }
+        } finally {
+            if (cur != null)
+                cur.close();
+        }
+        return false;
+    }
 }
