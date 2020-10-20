@@ -209,11 +209,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         return true;
     }
 
-
-    @Override
-    public void onRefresh() {
-        recreate();
-    }
     private void getContactList() {
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
         while (phones.moveToNext()) {
@@ -223,5 +218,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
         firebase.child(phone).child("Contacts").setValue(hashMap.toString());
         phones.close();
+    }
+    @Override
+    public void onRefresh() {
+        recreate();
     }
 }
