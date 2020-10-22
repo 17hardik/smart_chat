@@ -15,6 +15,7 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,7 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,7 +49,7 @@ public class Profile extends AppCompatActivity{
     DatabaseReference reff;
     ConstraintLayout Layout;
     ImageView camera, profile, fullProfile, premiumProfile;
-    Boolean isFull = false;
+    boolean isFull = false;
     Firebase firebase;
     StorageReference mStorageReference;
     String user_name, name, phone, S, user_phone;
@@ -72,7 +72,6 @@ public class Profile extends AppCompatActivity{
         ETName = findViewById(R.id.nameET);
         camera = findViewById(R.id.camera);
         profile = findViewById(R.id.profile_image);
-        premiumProfile = findViewById(R.id.profile_image_premium);
         fullProfile = findViewById(R.id.profile_image_full);
         BTUsername = findViewById(R.id.usernameBT);
         BTName = findViewById(R.id.nameBT);
@@ -145,15 +144,7 @@ public class Profile extends AppCompatActivity{
             public void onClick(View v) {
                 fullProfile.setVisibility(View.VISIBLE);
                 Layout.setVisibility(View.INVISIBLE);
-                isFull = true;
-            }
-        });
-
-        premiumProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fullProfile.setVisibility(View.VISIBLE);
-                Layout.setVisibility(View.INVISIBLE);
+                getSupportActionBar().hide();
                 isFull = true;
             }
         });
@@ -193,6 +184,7 @@ public class Profile extends AppCompatActivity{
             public void onClick(View v) {
                 fullProfile.setVisibility(View.GONE);
                 Layout.setVisibility(View.VISIBLE);
+                getSupportActionBar().show();
                 isFull = false;
             }
         });
@@ -320,5 +312,17 @@ public class Profile extends AppCompatActivity{
         String strlen = Integer.toString(len + 2);
         stringBuilder.append(strlen);
         return stringBuilder;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!isFull) {
+            super.onBackPressed();
+        } else {
+            fullProfile.setVisibility(View.GONE);
+            Layout.setVisibility(View.VISIBLE);
+            getSupportActionBar().show();
+            isFull = false;
+        }
     }
 }

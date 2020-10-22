@@ -10,19 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColorHint="#CFD8DC"
-        android:textColor="#CFD8DC"
-        android:hint="Write a message..."
+        android:hint="@string/write_a_message"
         android:id="@+id/messageArea"
         android:maxHeight="80dp"
-        />
+        android:importantForAutofill="no"
+        android:inputType="text" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="4"
         android:padding="4dp"
-        android:src="@android:drawable/ic_menu_send"
-        android:id="@+id/sendButton"/>
+        android:src="@drawable/ic_baseline_send_24"
+        android:id="@+id/sendButton"
+        android:contentDescription="@string/send_button" />
 
 </LinearLayout>

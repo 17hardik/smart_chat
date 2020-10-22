@@ -50,7 +50,7 @@ public class Chat extends AppCompatActivity {
     int i, count = 0;
     Intent intent;
     List<TextMessage> conversation;
-    Firebase reference1;
+    Firebase reference1, reference2;
     boolean isEncryptionSet = false, isChatLayoutOpened = false;
 
     @Override
@@ -77,6 +77,8 @@ public class Chat extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         conversation = new ArrayList<>();
         reference1 = new Firebase("https://smart-chat-cc69a.firebaseio.com/messages/" + name + "_" + chatwith);
+        reference2 = new Firebase("https://smart-chat-cc69a.firebaseio.com/messages/" + chatwith + "_" + name);
+
         scrollView.post(new Runnable() {
             @Override
             public void run() {
@@ -99,12 +101,14 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!isEncryptionSet) {
+                    Toast.makeText(Chat.this, "Enabled Encrypted Chat", Toast.LENGTH_SHORT).show();
                     encryptButton.setImageResource(R.drawable.ic_baseline_lock_open_24);
                     messageArea.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     messageArea.setTypeface(Typeface.SANS_SERIF);
                     messageArea.setSelection(messageArea.getText().length());
                     isEncryptionSet = true;
                 } else {
+                    Toast.makeText(Chat.this, "Disabled Encrypted Chat", Toast.LENGTH_SHORT).show();
                     encryptButton.setImageResource(R.drawable.ic_baseline_lock_24);
                     messageArea.setInputType(InputType.TYPE_CLASS_TEXT);
                     messageArea.setSelection(messageArea.getText().length());
@@ -142,6 +146,7 @@ public class Chat extends AppCompatActivity {
                     map.put("time", currentTime);
                     map.put("date", currentDate);
                     reference1.push().setValue(map);
+                    reference2.push().setValue(map);
                     scrollView.post(new Runnable() {
                         @Override
                         public void run() {

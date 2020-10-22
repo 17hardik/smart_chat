@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/layout"
-        tools:context=".Profile.Profile">
+        tools:context=".Profile">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
@@ -29,26 +29,11 @@
             app:layout_constraintHorizontal_bias="0.50"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image_premium"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:src="@drawable/ic_person_black_24dp"
-            app:civ_border_color="#FFD700"
-            android:visibility="gone"
-            app:civ_border_width="3dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.10"
-            app:layout_constraintHorizontal_bias="0.50"/>
-
-        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/camera"
             android:background="@drawable/circular_background"
-            android:src="@drawable/ic_photo_camera_black_24dp"
+            android:src="@drawable/ic_photo_camera_24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -65,7 +50,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.45"
-            app:layout_constraintHorizontal_bias="0.10"/>
+            app:layout_constraintHorizontal_bias="0.10"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
         <Button
             android:layout_width="165dp"
@@ -73,7 +61,7 @@
             android:background="@drawable/button"
             android:textColor="#ffffff"
             android:id="@+id/usernameBT"
-            android:text="Change Username"
+            android:text="@string/change_username"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +78,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.55"
-            app:layout_constraintHorizontal_bias="0.10"/>
+            app:layout_constraintHorizontal_bias="0.10"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
         <Button
             android:layout_width="165dp"
@@ -98,7 +89,7 @@
             android:background="@drawable/button"
             android:textColor="#ffffff"
             android:id="@+id/nameBT"
-            android:text="Change Name"
+            android:text="@string/change_name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,13 +103,12 @@
             android:background="@drawable/button"
             android:id="@+id/password"
             android:textColor="#ffffff"
-            android:text="Change Password"
+            android:text="@string/change_password"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.85"/>
-
 
         <Button
             android:layout_width="200dp"
@@ -126,26 +116,25 @@
             android:id="@+id/delete"
             android:background="@color/colorRed"
             android:textColor="#ffffff"
-            android:text="Delete Your Account"
+            android:text="@string/delete_your_account"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.95"/>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image_full"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/ic_person_black_24dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/profile_picture" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">Smart Chat</string>
     <string name="encrypted_chat">Encrypted chat is a feature that provides enhanced privacy and security of messages in any conversation. Normal text is converted into an encrypted code and only dots will be displayed in message area that makes it impossible to read and decrypt by unauthorized person or parties.</string>
+    <string name="change_username">Change Username</string>
+    <string name="change_name">Change Name</string>
+    <string name="change_password">Change Password</string>
+    <string name="delete_your_account">Delete Your Account</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="write_a_message">Write a message…</string>
+    <string name="send_button">Send Button</string>
+    <string name="encryption_switch">Encryption Switch</string>
+    <string name="info_button">Info Button</string>
+    <string name="enter_your_old_password">Enter Your Old Password</string>
+    <string name="enter_your_new_password">Enter Your New Password</string>
+    <string name="confirm_your_password">Confirm Your Password</string>
+    <string name="verify">Verify</string>
+    <string name="password_visibility_switch">Password Visibility Switch</string>
+    <string name="type_a_message">Type a Message</string>
+    <string name="decrypt_message">Decrypt Message</string>
+    <string name="enter_encrypted_message">Enter encrypted message</string>
+    <string name="your_decrypted_message_will_be_displayed_here">Your decrypted message will be displayed here</string>
+    <string name="enter_your_password">Enter Your Password</string>
 </resources>

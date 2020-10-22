@@ -11,18 +11,22 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:maxLines="2"
+        android:hint="@string/enter_encrypted_message"
         app:layout_constraintVertical_bias="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/decrypt_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#FFFFFF"
-        android:text="Decrypt Message"
+        android:text="@string/decrypt_message"
         android:background="@drawable/button"
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +38,7 @@
         android:id="@+id/decrypted_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your decrypted message will be displayed here"
+        android:text="@string/your_decrypted_message_will_be_displayed_here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

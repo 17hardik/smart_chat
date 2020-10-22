@@ -1,9 +1,11 @@
 package com.example.smartchat;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -218,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         firebase.child(phone).child("Contacts").setValue(hashMap.toString());
         phones.close();
     }
+
     @Override
     public void onRefresh() {
         recreate();

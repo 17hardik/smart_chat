@@ -62,10 +62,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         if (requestContactPermission(details.get(position).getPhone())) {
             try {
-                holder.Username.setText(details.get(position).getUsername());
+                holder.Username.setText(getContactName(details.get(position).getPhone(), context));
                 holder.Name.setText(details.get(position).getName());
-                holder.Number.setText(details.get(position).getPhone());
-                if(requestContactPermission(holder.Number.getText().toString())){
+//                holder.Number.setText(details.get(position).getPhone());
+                if(requestContactPermission(details.get(position).getPhone())){
                     holder.cardView.setVisibility(View.VISIBLE);
                 }
                 Thread thread = new Thread() {
@@ -95,7 +95,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
                         String phone = details.get(position).getPhone();
                         String username = details.get(position).getUsername();
                         intent.putExtra("Phone", phone);
-                        intent.putExtra("Username", username);
+                        intent.putExtra("Username", getContactName(details.get(position).getPhone(), context));
                         view.getContext().startActivity(intent);
                     }
                 });
@@ -123,7 +123,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             Name = itemView.findViewById(R.id.person_name);
             Number = itemView.findViewById(R.id.number);
             Profile_Picture = itemView.findViewById(R.id.profile_picture);
-            cardView = itemView.findViewById(R.id.gov_card);
+            cardView = itemView.findViewById(R.id.user_card);
         }
     }
 
@@ -252,4 +252,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         }
         return false;
     }
+
+    public String getContactName(final String phoneNumber, Context context) {
+        Uri uri=Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,Uri.encode(phoneNumber));
+        String[] projection = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
+        String contactName="";
+        Cursor cursor=context.getContentResolver().query(uri,projection,null,null,null);
+        if (cursor != null) {
+            if(cursor.moveToFirst()) {
+                contactName=cursor.getString(0);
+            }
+            cursor.close();
+        }
+        return contactName;
+    }
+
 }
