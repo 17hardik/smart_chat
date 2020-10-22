@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         Firebase.setAndroidContext(this);
         firebase = new Firebase("https://smart-chat-cc69a.firebaseio.com/Users");
         try {
-//            getContactList();
+            getContactList();
         } catch (Exception e) {
 
         }
@@ -91,8 +91,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                         });
                     }
-                },
-                3000
+                }, 3000
         );
 
         int searchCloseButtonId = mySearchView.getContext().getResources().getIdentifier("android:id/search_close_btn", null, null);
