@@ -422,32 +422,20 @@ public class Chat extends AppCompatActivity {
                                                     face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints();
 
                                             // If classification was enabled:
-                                            if (face.getSmilingProbability() != null) {
-                                                float smileProb = face.getSmilingProbability();
-                                                String smile = String.format("%.2f", smileProb);
-                                                if (Float.parseFloat(smile) > 0.2) {
-                                                    Toast.makeText(Chat.this, "Smiling", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(Chat.this, "Not Smiling", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                            if (face.getRightEyeOpenProbability() != null) {
-                                                float rightEyeOpenProb = face.getRightEyeOpenProbability();
-                                                String smile = String.format("%.2f", rightEyeOpenProb);
-                                                if (Float.parseFloat(smile) > 0.2) {
-                                                    Toast.makeText(Chat.this, "Right eye open", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(Chat.this, "Right eye close", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
 
-                                            if (face.getLeftEyeOpenProbability() != null) {
-                                                float leftEyeOpenProb = face.getLeftEyeOpenProbability();
-                                                String smile = String.format("%.2f", leftEyeOpenProb);
-                                                if (Float.parseFloat(smile) > 0.2) {
-                                                    Toast.makeText(Chat.this, "Left eye open", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(Chat.this, "Left eye close", Toast.LENGTH_SHORT).show();
+                                            if(face.getLeftEyeOpenProbability() != null && face.getRightEyeOpenProbability() != null && face.getSmilingProbability() != null) {
+                                                if(face.getLeftEyeOpenProbability() < 0.3 && face.getRightEyeOpenProbability() < 0.3 && face.getSmilingProbability() > 0.2) {
+                                                    messageArea.setText("\uD83D\uDE0A");
+                                                } else if (face.getLeftEyeOpenProbability() < 0.2 && face.getSmilingProbability() > 0.2) {
+                                                    messageArea.setText("\uD83D\uDE09");
+                                                } else if(face.getSmilingProbability() < 0.2 && face.getLeftEyeOpenProbability() < 0.2 && face.getRightEyeOpenProbability() < 0.2) {
+                                                    messageArea.setText("\uD83D\uDE11");
+                                                } else if (face.getSmilingProbability() > 0.2 && face.getSmilingProbability() <= 0.7) {
+                                                    messageArea.setText("\uD83D\uDE42");
+                                                } else if(face.getSmilingProbability() > 0.7) {
+                                                    messageArea.setText("\uD83D\uDE00");
+                                                } else if(face.getSmilingProbability() < 0.2) {
+                                                    messageArea.setText("\uD83D\uDE10");
                                                 }
                                             }
 

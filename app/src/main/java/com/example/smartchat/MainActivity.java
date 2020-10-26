@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 UserCardView d = snapshot.getValue(UserCardView.class);
-                                if (!(phone.equals(childDataSnapshot.getKey()))) {
+                                if ((phone.equals(childDataSnapshot.getKey()))) {
                                     details.add(d);
                                     userAdapter = new UserAdapter(details, MainActivity.this);
                                     users.setAdapter(userAdapter);
