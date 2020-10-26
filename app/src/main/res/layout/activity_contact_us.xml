@@ -45,7 +45,7 @@
                 android:textSize="18sp"
                 tools:ignore="RtlSymmetry"
                 android:importantForAutofill="no"
-                android:inputType="text" />
+                android:inputType="textMultiLine" />
 
         </RelativeLayout>
 

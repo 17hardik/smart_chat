@@ -14,7 +14,7 @@
         android:id="@+id/messageArea"
         android:maxHeight="80dp"
         android:importantForAutofill="no"
-        android:inputType="text" />
+        android:inputType="textMultiLine" />
 
     <ImageView
         android:layout_width="match_parent"
