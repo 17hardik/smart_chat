@@ -108,4 +108,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <ImageView
+        android:id="@+id/emoji_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/emoji_icon"
+        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintVertical_bias="0.98"
+        app:layout_constraintBottom_toBottomOf="@id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/info_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

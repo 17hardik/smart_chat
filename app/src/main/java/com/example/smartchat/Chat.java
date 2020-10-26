@@ -68,7 +68,7 @@ import java.util.Random;
 public class Chat extends AppCompatActivity {
 
     LinearLayout layout;
-    ImageView sendButton, encryptButton, infoButton;
+    ImageView sendButton, encryptButton, infoButton, emojiButton;
     EditText messageArea;
     ScrollView scrollView;
     TextView Suggestion1, Suggestion2, Suggestion3;
@@ -107,6 +107,7 @@ public class Chat extends AppCompatActivity {
         layout = findViewById(R.id.layout1);
         sendButton = findViewById(R.id.sendButton);
         encryptButton = findViewById(R.id.encrypt_button);
+        emojiButton = findViewById(R.id.emoji_button);
         infoButton = findViewById(R.id.info_button);
         messageArea = findViewById(R.id.messageArea);
         scrollView = findViewById(R.id.scrollView);
@@ -138,16 +139,24 @@ public class Chat extends AppCompatActivity {
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setContentView(R.layout.encryption_info);
+                getSupportActionBar().hide();
+                isChatLayoutOpened = true;
+            }
+        });
+
+        emojiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 if(checkPermission()) {
-                    takePicture();
+                    try {
+                        takePicture();
+                    } catch(Exception e) {
+                        Toast.makeText(Chat.this, "Unable to detect face", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     requestPermission();
                 }
-
-
-//                setContentView(R.layout.encryption_info);
-//                getSupportActionBar().hide();
-//                isChatLayoutOpened = true;
             }
         });
 
@@ -403,10 +412,14 @@ public class Chat extends AppCompatActivity {
                                 new OnSuccessListener<List<Face>>() {
                                     @Override
                                     public void onSuccess(List<Face> faces) {
+                                        if(faces.toString().equals("[]")) {
+                                            Toast.makeText(Chat.this, "No face detected", Toast.LENGTH_SHORT).show();
+                                        }
+
                                         for (Face face : faces) {
                                             Rect bounds = face.getBoundingBox();
                                             float rotY = face.getHeadEulerAngleY();  // Head is rotated to the right rotY degrees
-                                            float rotZ = face.getHeadEulerAngleZ();  // Head is tilted sideways rotZ degrees
+                                            float rotZ =    + face.getHeadEulerAngleZ();  // Head is tilted sideways rotZ degrees
 
                                             // If landmark detection was enabled (mouth, ears, eyes, cheeks, and
                                             // nose available):
@@ -437,6 +450,8 @@ public class Chat extends AppCompatActivity {
                                                 } else if(face.getSmilingProbability() < 0.2) {
                                                     messageArea.setText("\uD83D\uDE10");
                                                 }
+                                            } else {
+                                                Toast.makeText(Chat.this, "Unable to detect face", Toast.LENGTH_SHORT).show();
                                             }
 
                                             // If face tracking was enabled:
