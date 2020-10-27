@@ -93,7 +93,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
                         Intent intent = new Intent(context, Chat.class);
                         String phone = details.get(position).getPhone();
-                        String username = details.get(position).getUsername();
                         intent.putExtra("Phone", phone);
                         intent.putExtra("Username", getContactName(details.get(position).getPhone(), context));
                         view.getContext().startActivity(intent);
