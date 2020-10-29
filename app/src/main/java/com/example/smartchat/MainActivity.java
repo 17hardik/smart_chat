@@ -37,7 +37,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     TextView Title;
     String S, phone, u_name;
-    int i, x, count = 0;
+    int i, count = 0;
     Menu menu1;
     DatabaseReference reff, reff1;
     RecyclerView users;

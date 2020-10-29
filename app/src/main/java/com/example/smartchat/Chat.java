@@ -21,8 +21,10 @@ import android.graphics.Typeface;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.util.SparseIntArray;
 import android.view.Surface;
@@ -78,7 +80,7 @@ public class Chat extends AppCompatActivity {
     List<TextMessage> conversation;
     Firebase reference1, reference2;
     Bitmap bitmap;
-    boolean isEncryptionSet = false, isChatLayoutOpened = false;
+    boolean isEncryptionSet = false, isChatLayoutOpened = false, isFirstCreated = true;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
     static {
@@ -119,6 +121,13 @@ public class Chat extends AppCompatActivity {
         conversation = new ArrayList<>();
         reference1 = new Firebase("https://smart-chat-cc69a.firebaseio.com/messages/" + name + "_" + chatwith);
         reference2 = new Firebase("https://smart-chat-cc69a.firebaseio.com/messages/" + chatwith + "_" + name);
+
+        new Handler().postDelayed((new Runnable() {
+            @Override
+            public void run() {
+             isFirstCreated = false;
+            }
+        }),3000);
 
         scrollView.post(new Runnable() {
             @Override
@@ -199,6 +208,7 @@ public class Chat extends AppCompatActivity {
                 final String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
 
                 if (!messageText.equals("")) {
+
                     Map<String, String> map = new HashMap<String, String>();
                     if (isEncryptionSet) {
                         map.put("message", encryptMessage(messageText).toString());
@@ -265,8 +275,16 @@ public class Chat extends AppCompatActivity {
                 messageArea.setText("");
 
                 if (userName.equals(name)) {
+                    if (!isFirstCreated) {
+                        final MediaPlayer mp = MediaPlayer.create(Chat.this, R.raw.send);
+                        mp.start();
+                    }
                     addMessageBox(time + "\n\n" + message, 1);
                 } else {
+                    if (!isFirstCreated) {
+                        final MediaPlayer mp = MediaPlayer.create(Chat.this, R.raw.receive);
+                        mp.start();
+                    }
                     addMessageBox(time + "\n\n" + message, 2);
                 }
                 scrollView.post(new Runnable() {
