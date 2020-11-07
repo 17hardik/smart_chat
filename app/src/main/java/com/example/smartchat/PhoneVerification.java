@@ -146,7 +146,7 @@ public class PhoneVerification extends AppCompatActivity implements View.OnClick
                                         SharedPreferences.Editor editor2 = getSharedPreferences(S, i).edit();
                                         editor2.putString("Status", "Yes");
                                         editor2.apply();
-                                        Intent verificationIntent = new Intent(PhoneVerification.this, MainActivity.class);
+                                        Intent verificationIntent = new Intent(PhoneVerification.this, Login.class);
                                         verificationIntent.putExtra("userphone", phone);
                                         startActivity(verificationIntent);
                                         finishAffinity();

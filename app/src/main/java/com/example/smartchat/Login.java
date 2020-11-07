@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
     Button loginButton;
     DatabaseReference reff;
     ImageView Eye;
-    String phone, pass, S, Cipher, A, new_phone, realPhone = "Null", premium_date, isFirst, currentDate;
+    String phone, pass, S, Cipher, A, new_phone, realPhone = "Null", isFirst;
     int i, count = 1, b;
 
     @Override
@@ -59,10 +59,6 @@ public class Login extends AppCompatActivity {
         Eye = findViewById(R.id.eye);
         loginButton = findViewById(R.id.loginButton);
         FirebaseApp.initializeApp(this);
-
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-        currentDate = df.format(c);
 
         Eye.setOnClickListener(new View.OnClickListener() {
             @Override

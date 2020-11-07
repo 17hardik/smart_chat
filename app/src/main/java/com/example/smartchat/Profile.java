@@ -118,7 +118,7 @@ public class Profile extends AppCompatActivity{
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            Toast.makeText(Profile.this, "Profile picture is too large to display", Toast.LENGTH_SHORT).show();
+
                         }
                     });
                 } catch(Exception e){
