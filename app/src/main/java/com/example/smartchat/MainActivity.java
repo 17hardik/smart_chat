@@ -37,7 +37,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     TextView Title;
     String S, phone, u_name;
-    int i, x, count = 0;
+    int i, count = 0;
     Menu menu1;
     DatabaseReference reff, reff1;
     RecyclerView users;
@@ -167,8 +167,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                u_name = dataSnapshot.child("Username").getValue().toString();
-                phone = dataSnapshot.child("Phone").getValue().toString();
+                try {
+                    phone = dataSnapshot.child("Phone").getValue().toString();
+                } catch (Exception e) {
+
+                }
             }
 
             @Override
