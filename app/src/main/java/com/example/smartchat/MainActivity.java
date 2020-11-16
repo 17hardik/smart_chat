@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
 
         final SearchView mySearchView = view.findViewById(R.id.mySearchView);
+        mySearchView.setMaxWidth(Integer.MAX_VALUE);
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
@@ -90,14 +91,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 userAdapter.getFilter().filter(newText);
                                 return false;
                             }
-
                         });
                     }
                 }, 3000
         );
 
         int searchCloseButtonId = mySearchView.getContext().getResources().getIdentifier("android:id/search_close_btn", null, null);
-        ImageView closeButton = (ImageView) mySearchView.findViewById(searchCloseButtonId);
+        ImageView closeButton = mySearchView.findViewById(searchCloseButtonId);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Smart Chat</string>
+    <string name="app_name">PingByte</string>
     <string name="encrypted_chat">Encrypted chat is a feature that provides enhanced privacy and security of messages in any conversation. Normal text is converted into an encrypted code and only dots will be displayed in message area that makes it impossible to read and decrypt by unauthorized person or parties.</string>
     <string name="change_username">Change Username</string>
     <string name="change_name">Change Name</string>
