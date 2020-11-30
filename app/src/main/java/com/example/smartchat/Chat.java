@@ -327,6 +327,7 @@ public class Chat extends AppCompatActivity {
 
         if (type == 1) {
             textView.setBackgroundResource(R.drawable.userchatbox);
+            textView.setTextColor(getResources().getColor(R.color.colorWhite));
             lp.setMargins(600, 0, 0, 10);
         } else {
             textView.setBackgroundResource(R.drawable.chatwithchatbox);

@@ -35,8 +35,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    TextView Title;
-    String S, phone, u_name;
+    TextView Title, noContact;
+    String S, phone;
     int i, count = 0;
     Menu menu1;
     DatabaseReference reff, reff1;
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         getSupportActionBar().setCustomView(R.layout.chat_action_bar);
         View view = getSupportActionBar().getCustomView();
         Title = view.findViewById(R.id.users);
+        noContact = findViewById(R.id.no_contact);
         users.setLayoutManager(new LinearLayoutManager(this));
         details = new ArrayList<>();
         swipeRefreshLayout = findViewById(R.id.swipe_layout);
@@ -156,6 +157,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void run() {
                 try {
+                    if (!userAdapter.isContactPresent) {
+                        noContact.setVisibility(View.VISIBLE);
+                    }
                     pd.dismiss();
                 } catch (Exception e) {
 

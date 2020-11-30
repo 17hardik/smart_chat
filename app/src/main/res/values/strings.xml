@@ -20,4 +20,5 @@
     <string name="enter_encrypted_message">Enter encrypted message</string>
     <string name="your_decrypted_message_will_be_displayed_here">Your decrypted message will be displayed here</string>
     <string name="enter_your_password">Enter Your Password</string>
+    <string name="no_contact">No contact found, please invite your friends on this app and save their contact number in your phonebook to communicate with them.</string>
 </resources>

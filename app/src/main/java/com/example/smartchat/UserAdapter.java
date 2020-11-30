@@ -36,7 +36,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     Context context;
     ArrayList<UserCardView> details;
     ArrayList<UserCardView> fullDetails;
-    boolean isPresent;
+    boolean isPresent, isContactPresent = false;
     MainActivity mainActivity;
 
 
@@ -61,6 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
                 holder.Name.setText(details.get(position).getName());
 //                holder.Number.setText(details.get(position).getPhone());
                 if(requestContactPermission(details.get(position).getPhone())){
+                    isContactPresent = true;
                     holder.cardView.setVisibility(View.VISIBLE);
                 }
                 Thread thread = new Thread() {
@@ -259,6 +260,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             cursor.close();
         }
         return contactName;
+    }
+
+    public boolean isContactPresent() {
+        return isContactPresent;
     }
 
 }
