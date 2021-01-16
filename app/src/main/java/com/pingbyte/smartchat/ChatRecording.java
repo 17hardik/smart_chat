@@ -1,4 +1,4 @@
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 import android.view.View;
 import android.widget.TextView;

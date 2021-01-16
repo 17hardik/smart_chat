@@ -15,6 +15,67 @@
       },
       "oauth_client": [
         {
+          "client_id": "842180427165-bpckk9fii8q2q9o65igmiiqq57d38elb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartchat",
+            "certificate_hash": "a835a8c74016f3f1dc72b58d4cfbe38987f25559"
+          }
+        },
+        {
+          "client_id": "842180427165-embnejrro9lkot8ip7l9emmp1gm576m0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartchat",
+            "certificate_hash": "4a22872575fe54a147b2a3be90e7c539f61ccb24"
+          }
+        },
+        {
+          "client_id": "842180427165-fh9upqfh1k7s4h90475emt889a5gun6r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartchat",
+            "certificate_hash": "1b4cc2ed1ebdb99a50ae0749d28bf4fda69cae2e"
+          }
+        },
+        {
+          "client_id": "842180427165-vhljsiec8catpkpa6nul23citlp12h49.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartchat",
+            "certificate_hash": "41a6ca1378fef0b59a0d38cd5b49937691a0077e"
+          }
+        },
+        {
+          "client_id": "842180427165-uukflvkbu1bm41c4pa4u544tmv8uspoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6KvbzR7V-nEeq2j_TSSYC7Ft-VH4B8lo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842180427165-uukflvkbu1bm41c4pa4u544tmv8uspoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842180427165:android:7779fe8aedb4a27add0374",
+        "android_client_info": {
+          "package_name": "com.pingbyte.smartchat"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "842180427165-uukflvkbu1bm41c4pa4u544tmv8uspoj.apps.googleusercontent.com",
           "client_type": 3
         }

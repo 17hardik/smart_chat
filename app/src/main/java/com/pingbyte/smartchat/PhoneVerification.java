@@ -1,4 +1,4 @@
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

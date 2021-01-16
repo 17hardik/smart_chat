@@ -1,4 +1,4 @@
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 public class ChatMessage {
 

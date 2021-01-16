@@ -1,4 +1,4 @@
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;

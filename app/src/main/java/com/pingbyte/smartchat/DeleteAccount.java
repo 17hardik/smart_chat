@@ -1,4 +1,4 @@
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 import android.app.Activity;
 import android.app.Dialog;

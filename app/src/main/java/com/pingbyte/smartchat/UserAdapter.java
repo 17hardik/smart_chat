@@ -1,4 +1,4 @@
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

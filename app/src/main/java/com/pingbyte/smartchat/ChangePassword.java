@@ -1,5 +1,5 @@
 
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

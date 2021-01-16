@@ -1,4 +1,4 @@
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;

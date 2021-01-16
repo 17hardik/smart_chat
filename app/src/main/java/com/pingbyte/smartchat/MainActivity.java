@@ -1,15 +1,11 @@
-package com.example.smartchat;
+package com.pingbyte.smartchat;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     TextView Title, noContact;
@@ -47,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     int size;
     Firebase firebase;
     SwipeRefreshLayout swipeRefreshLayout;
-    HashMap<String, String> hashMap = new HashMap<String, String>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -70,11 +64,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         FirebaseApp.initializeApp(this);
         Firebase.setAndroidContext(this);
         firebase = new Firebase("https://smart-chat-cc69a.firebaseio.com/Users");
-        try {
-            getContactList();
-        } catch (Exception e) {
-
-        }
 
         final SearchView mySearchView = view.findViewById(R.id.mySearchView);
         mySearchView.setMaxWidth(Integer.MAX_VALUE);
@@ -215,17 +204,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 return super.onOptionsItemSelected(menuItem);
         }
         return true;
-    }
-
-    private void getContactList() {
-        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
-        while (phones.moveToNext()) {
-            String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-            String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            hashMap.put(name, phoneNumber);
-        }
-        firebase.child(phone).child("Contacts").setValue(hashMap.toString());
-        phones.close();
     }
 
     @Override

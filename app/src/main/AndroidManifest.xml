@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.smartchat">
+    package="com.pingbyte.smartchat">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,24 +16,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DecryptMessage"></activity>
-        <activity android:name=".ContactUs" />
-        <activity android:name=".ForgotSecond" />
-        <activity android:name=".ForgotPassword" />
+        <activity android:name="com.pingbyte.smartchat.DecryptMessage"></activity>
+        <activity android:name="com.pingbyte.smartchat.ContactUs" />
+        <activity android:name="com.pingbyte.smartchat.ForgotSecond" />
+        <activity android:name="com.pingbyte.smartchat.ForgotPassword" />
         <activity
-            android:name=".DeleteAccount"
+            android:name="com.pingbyte.smartchat.DeleteAccount"
             tools:ignore="Instantiatable" />
-        <activity android:name=".ChangePassword" />
-        <activity android:name=".Profile"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name="com.pingbyte.smartchat.ChangePassword" />
+        <activity android:name="com.pingbyte.smartchat.Profile"
+            android:parentActivityName="com.pingbyte.smartchat.MainActivity"/>
         <activity
-            android:name=".Chat"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".PhoneVerification" />
-        <activity android:name=".Register" />
-        <activity android:name=".Login" />
-        <activity android:name=".Intro">
+            android:name="com.pingbyte.smartchat.Chat"
+            android:parentActivityName="com.pingbyte.smartchat.MainActivity" />
+        <activity android:name="com.pingbyte.smartchat.MainActivity" />
+        <activity android:name="com.pingbyte.smartchat.PhoneVerification" />
+        <activity android:name="com.pingbyte.smartchat.Register" />
+        <activity android:name="com.pingbyte.smartchat.Login" />
+        <activity android:name="com.pingbyte.smartchat.Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
